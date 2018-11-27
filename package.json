@@ -15,7 +15,8 @@
     "blueimp-file-upload": "^9.28.0",
     "bulma": "^0.7.2",
     "ckeditor": "^4.11.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
+    "gulp-cli": "^2.0.1",
     "gulp-copy": "^4.0.1",
     "gulp-npm-dist": "^1.0.2",
     "jquery": "^3.3.1"
