@@ -1,0 +1,33 @@
+{% block HobbyType_row %}
+
+    {% form_theme form 'Form/Fields.html.twig' %}
+
+    <div class="columns">
+        <div class="column">
+            <div class="text-center">{{ form_label(form.Name) }}</div>
+            <div>{{ form_widget(form.Name) }}</div>
+        </div>
+        <div class="column">
+            <div class="text-center">{{ form_label(form.AgeStarted) }}</div>
+            <div>{{ form_widget(form.AgeStarted) }}</div>
+        </div>
+
+        <div class="column">
+            <a href="#" class="collection-up button" title="Move element up"><span
+                        class="glyphicon glyphicon-arrow-up"></span></a>
+            <a href="#" class="collection-down button" title="Move element down"><span
+                        class="glyphicon glyphicon-arrow-down"></span></a>
+        </div>
+        <div class="column">
+            <a href="#" class="collection-remove button" title="Delete element"><span
+                        class="glyphicon glyphicon-trash"></span></a>
+            <a href="#" class="collection-add button" title="Add element"><span
+                        class="glyphicon glyphicon-plus-sign"></span></a>
+        </div>
+        <div class="column">
+            <a href="#" class="collection-duplicate button" title="Duplicate element"><span
+                        class="glyphicon glyphicon-th-large"></span></a>
+        </div>
+    </div>
+
+{% endblock %}

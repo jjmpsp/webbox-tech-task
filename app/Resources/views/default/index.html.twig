@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'Form/Fields.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Hello, {{ currentUser.fullName }}! You last logged in
+            on {{ currentUser.lastLogin|localizeddate('long', 'short') }}</h1>
+        <a href="{{ path('fos_user_security_logout') }}">Logout</a>
+
+        <hr>
+
+        <div class="field">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {% form_theme hobbiesForm
+                'jquery.collection.html.twig'
+                'hobby-theme.html.twig' %}
+            {{ form(hobbiesForm) }}
+            {% form_theme form 'Form/Fields.html.twig' %}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('libs/bulma/css/bulma.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/glyphicons.css') }}">
+
+    <style>
+        #preview-image {
+            height: 300px;
+            background-repeat: no-repeat;
+        }
+
+        #form_dateOfBirth .control {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .collection .button{
+            margin-top: 20px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('libs/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('libs/blueimp-file-upload/js/vendor/jquery.ui.widget.js') }}"></script>
+    <script src="{{ asset('libs/blueimp-load-image/js/load-image.all.min.js') }}"></script>
+    <script src="{{ asset('libs/blueimp-canvas-to-blob/js/canvas-to-blob.js') }}"></script>
+    <script src="{{ asset('libs/blueimp-file-upload/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('libs/blueimp-file-upload/js/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('libs/blueimp-file-upload/js/jquery.fileupload-process.js') }}"></script>
+    <script src="{{ asset('libs/blueimp-file-upload/js/jquery.fileupload-image.js') }}"></script>
+
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+
+    <script type="text/javascript">
+        $('.collection').collection();
+    </script>
+
+    <script>
+        CKEDITOR.replace('form_biography');
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#form_profileImage').fileupload({
+                dataType: 'json',
+                url: '/upload-profile-image/',
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: 999000,
+                disableImageResize: false,
+                imageMaxWidth: 800,
+                imageMaxHeight: 800,
+                imageCrop: true,
+                progressall: function (e, data) {
+                    console.log(data);
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    console.log(progress);
+                },
+                done: function (e, data) {
+                    $.each(data.result.files, function (index, file) {
+                        console.log(file.name);
+                    });
+                }
+            }).bind('fileuploadprocessalways', function (e, data) {
+                var canvas = data.files[0].preview;
+                var dataURL = canvas.toDataURL();
+                $('#form_profileImage').parent().append('<div id="preview-image"></div>');
+                $("#preview-image").css("background-image", 'url(' + dataURL + ')')
+                    .height(canvas.height)
+                    .width(canvas.width);
+
+            })
+        });
+    </script>
+{% endblock %}

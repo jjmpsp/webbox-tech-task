@@ -1,0 +1,7 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    # Just load the security routes for this sample application
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"

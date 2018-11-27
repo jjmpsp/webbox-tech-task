@@ -1,0 +1,23 @@
+{
+  "name": "joel_murphy_tech_task",
+  "version": "1.0.0",
+  "description": "Joel Murphy's attempt at the WebBox PHP Tech Task",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joel Murphy",
+  "license": "ISC",
+  "dependencies": {
+    "blueimp-file-upload": "^9.28.0",
+    "bulma": "^0.7.2",
+    "ckeditor": "^4.11.1",
+    "gulp": "^3.9.1",
+    "gulp-copy": "^4.0.1",
+    "gulp-npm-dist": "^1.0.2",
+    "jquery": "^3.3.1"
+  }
+}
